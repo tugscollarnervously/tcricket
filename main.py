@@ -134,34 +134,73 @@ while overs_bowled < 20:
     # event generator
 
         if 0.0 < dice_roll <= 0.001:
-            batter_rare += 1
-            print(f"{over_number} - {dice_roll} - Batter Rare Event")
+            batter_rare_roll = random.randint(0, 100)
+            if batter_rare_roll <= 1:
+                wickets += 1
+                batter_rare += 1
+                print(f"{over_number} - {dice_roll} - Batter Retired Out")
+            elif 1 < batter_rare_roll <= 2:
+                wickets += 1
+                batter_rare += 1
+                print(f"{over_number} - {dice_roll} - Batter Retired Hurt")
+            elif 2 < batter_rare_roll <= 16:
+                wickets += 1
+                batter_rare += 1
+                print(f"{over_number} - {dice_roll} - Batter Out - Hit Wicket")
+            elif 16 < batter_rare_roll <= 17:
+                wickets += 1
+                batter_rare += 1
+                print(f"{over_number} - {dice_roll} - Batter Out - Obstructing the Field")
+            elif 17 < batter_rare_roll <= 18:
+                runs += 5
+                batter_rare += 1
+                print(f"{over_number} - {dice_roll} - Penalty on bowling team - 5 runs")
+            elif 18 < batter_rare_roll <= 33:
+                runs += 4
+                total_batter_runs += 4
+                batter_rare += 1
+                print(f"{over_number} - {dice_roll} - Non Boundary 4 runs")
+            elif 33 < batter_rare_roll <= 39:
+                runs += 6
+                total_batter_runs += 6
+                batter_rare += 1
+                print(f"{over_number} - {dice_roll} - Non Boundary 6 runs")
+            elif 39 < batter_rare_roll <= 100:
+                runs += 5
+                total_batter_runs += 5
+                batter_rare += 1
+                print(f"{over_number} - {dice_roll} - Batter rare - 5 runs")
         elif 0.001 < dice_roll <= 0.003:
             bye_roll = random.randint(0, 100)
             if bye_roll <= 67:
                 batter_bye += 1
                 runs += 1
                 total_batter_runs += 1
+                runs_in_over += 1
                 print(f"{over_number} - {dice_roll} - Bye - 1 Run")
             elif 67 < bye_roll <= 73:
                 batter_bye += 1
                 runs += 2
                 total_batter_runs += 2
+                runs_in_over += 2
                 print(f"{over_number} - {dice_roll} - Bye - 2 Runs")
             elif 73 < bye_roll <= 74:
                 batter_bye += 1
                 runs += 3
                 total_batter_runs += 3
+                runs_in_over += 3
                 print(f"{over_number} - {dice_roll} - Bye - 3 Runs")
             elif 74 < bye_roll <= 99:
                 batter_bye += 1
                 runs += 4
                 total_batter_runs += 4
+                runs_in_over += 4
                 print(f"{over_number} - {dice_roll} - Bye - 4 Runs")
             else:
                 batter_bye += 1
                 runs += 5
                 total_batter_runs += 5
+                runs_in_over += 5
                 print(f"{over_number} - {dice_roll} - Bye - 5 Runs")
         elif 0.003 < dice_roll <= 0.018:
             legbye_roll = random.randint(0, 100)
@@ -169,26 +208,31 @@ while overs_bowled < 20:
                 batter_legbye += 1
                 runs += 1
                 total_batter_runs += 1
+                runs_in_over += 1
                 print(f"{over_number} - {dice_roll} - Legbye - 1 Run")
             elif 87 < legbye_roll <= 92:
                 batter_legbye += 1
                 runs += 2
                 total_batter_runs += 2
+                runs_in_over += 2
                 print(f"{over_number} - {dice_roll} - Legbye - 2 Runs")
             elif 92 < legbye_roll <= 93:
                 batter_legbye += 1
                 runs += 3
                 total_batter_runs += 3
+                runs_in_over += 3
                 print(f"{over_number} - {dice_roll} - Legbye - 3 Runs")
             elif 93 < legbye_roll <= 99:
                 batter_legbye += 1
                 runs += 4
                 total_batter_runs += 4
+                runs_in_over += 4
                 print(f"{over_number} - {dice_roll} - Legbye - 4 Runs")
             else:
                 batter_legbye += 1
                 runs += 5
                 total_batter_runs += 5
+                runs_in_over += 5
                 print(f"{over_number} - {dice_roll} - Legbye - 5 Runs")
         elif 0.018 < dice_roll <= 0.020:
             batter_out_stumped += 1
@@ -212,26 +256,31 @@ while overs_bowled < 20:
             batter_single += 1
             runs += 1
             total_batter_runs += 1
+            runs_in_over += 1
             print(f"{over_number} - {dice_roll} - Single to {hit_location(location_dice_roll)}.")
         elif 0.367 < dice_roll <= 0.398:
             batter_two += 1
             runs += 2
             total_batter_runs += 2
+            runs_in_over += 2
             print(f"{over_number} - {dice_roll} - Two runs to {hit_location(location_dice_roll)}.")
         elif 0.398 < dice_roll <= 0.400:
             batter_three += 1
             runs += 3
             total_batter_runs += 3
+            runs_in_over += 3
             print(f"{over_number} - {dice_roll} - Three runs to {hit_location(location_dice_roll)}.")
         elif 0.400 < dice_roll <= 0.455:
             batter_boundary += 1
             runs += 4
             total_batter_runs += 4
+            runs_in_over += 4
             print(f"{over_number} - {dice_roll} - Boundary to {hit_location(location_dice_roll)}.")
         elif 0.455 < dice_roll <= 0.499:
             batter_six += 1
             runs += 6
             total_batter_runs += 6
+            runs_in_over += 6
             print(f"{over_number} - {dice_roll} - Six to {hit_location(location_dice_roll)}!")
         elif 0.500 < dice_roll <= 0.501:
             bowler_rare += 1
@@ -242,26 +291,31 @@ while overs_bowled < 20:
                 bowler_wide += 1
                 runs += 1
                 total_batter_runs += 1
+                runs_in_over += 1
                 print(f"{over_number} - {dice_roll} - Wide - 1 Run")
             elif 91 < wide_roll <= 95:
                 bowler_wide += 1
                 runs += 2
                 total_batter_runs += 2
+                runs_in_over += 2
                 print(f"{over_number} - {dice_roll} - Wide - 2 Runs")
             elif 95 < wide_roll <= 96:
                 bowler_wide += 1
                 runs += 3
                 total_batter_runs += 3
+                runs_in_over += 3
                 print(f"{over_number} - {dice_roll} - Wide - 3 Runs")
             elif 96 < wide_roll <= 97:
                 bowler_wide += 1
                 runs += 4
                 total_batter_runs += 4
+                runs_in_over += 4
                 print(f"{over_number} - {dice_roll} - Wide - 4 Runs")
             else:
                 bowler_wide += 1
                 runs += 5
                 total_batter_runs += 5
+                runs_in_over += 5
                 print(f"{over_number} - {dice_roll} - Wide - 5 Runs")
         elif 0.532 < dice_roll <= 0.536:
             noball_roll = random.randint(0, 100)
@@ -272,21 +326,25 @@ while overs_bowled < 20:
                 bowler_noball += 1
                 runs += 1
                 total_batter_runs += 1
+                runs_in_over += 1
                 print(f"{over_number} - {dice_roll} - No ball - 1 Run")
             elif 75 < noball_roll <= 81:
                 bowler_noball += 1
                 runs += 2
                 total_batter_runs += 2
+                runs_in_over += 2
                 print(f"{over_number} - {dice_roll} - No ball - 2 Runs")
             elif 81 < noball_roll <= 93:
                 bowler_noball += 1
                 runs += 4
                 total_batter_runs += 4
+                runs_in_over += 4
                 print(f"{over_number} - {dice_roll} - No ball - 4 Runs")
             else:
                 bowler_noball += 1
                 runs += 6
                 total_batter_runs += 6
+                runs_in_over += 6
                 print(f"{over_number} - {dice_roll} - No ball - 6 Runs")
         elif 0.536 < dice_roll <= 0.537:
             bowler_out_caught_behind += 1
@@ -310,24 +368,29 @@ while overs_bowled < 20:
             bowler_single += 1
             runs += 1
             total_bowler_runs += 1
+            runs_in_over += 1
             print(f"{over_number} - {dice_roll} - Single to {hit_location(location_dice_roll)}.")
         elif 0.908 < dice_roll <= 0.940:
             bowler_two += 1
             runs += 2
             total_bowler_runs += 2
+            runs_in_over += 2
             print(f"{over_number} - {dice_roll} - Three runs to {hit_location(location_dice_roll)}.")
         elif 0.940 < dice_roll <= 0.942:
             bowler_three += 1
             runs += 3
             total_bowler_runs += 3
+            runs_in_over += 3
             print(f"{over_number} - {dice_roll} - Two runs to {hit_location(location_dice_roll)}.")
         else:
             bowler_boundary += 1
             runs += 4
             total_bowler_runs += 4
+            runs_in_over += 4
             print(f"{over_number} - {dice_roll} - Boundary to {hit_location(location_dice_roll)}.")
     overs += 1
-    print(f"end of over {overs_bowled}. {runs} runs scored. {wickets} wickets taken.\n")
+    print(f"end of over {overs}. {runs} runs scored. {wickets} wickets taken. runs in over {runs_in_over}\n")
+    runs_in_over = 0
 
 print("\n")
 
